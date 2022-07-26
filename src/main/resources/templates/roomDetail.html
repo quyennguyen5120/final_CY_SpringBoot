@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Cập nhật phòng')" />
+<body>
+<div class="container">
+    <h2>Thông tin phòng hiện tại</h2>
+    <div class="d-flex mb-2" style="font-weight: 600;">
+        <a th:href="@{/roomIndex}" type="submit" >Quay lại</a>
+    </div>
+<!--    <form class="modal-content" method="post"  th:object="${dto}">-->
+        <div class="modal-body">
+            <input type="text" name="roomId"  th:value="${dto.getRoomId()}" class="form-control d-none">
+            <div class="form-group">
+                <label for="codeRoom">Mã phòng</label>
+                <input disabled type="text" name="codeRoom"  th:value="${dto.getCodeRoom()}" class="form-control" id="codeRoom"  placeholder="Mã phòng ...">
+            </div>
+            <div class="form-group">
+                <label for="nameRoom">Tên phòng</label>
+                <input disabled type="text" name="nameRoom" th:value="${dto.getNameRoom()}" class="form-control" id="nameRoom"  placeholder="Tên phòng ...">
+            </div>
+            <div class="form-group">
+                <label for="priceRoom">Giá phòng/đêm</label>
+                <input disabled type="number" name="priceRoom"  th:value="${dto.getPriceRoom()}" class="form-control" id="priceRoom" placeholder="Giá phòng một đêm ...">
+            </div>
+            <div class="form-group">
+                <label for="nameCustomer">Tên khách hàng</label>
+                <input disabled type="text" name="nameCustomer"  th:value="${dto.getNameCustomer()}" class="form-control" id="nameCustomer" placeholder="Tên khách hàng ...">
+            </div>
+            <div class="form-group">
+                <label for="addressCustomer">Địa chỉ</label>
+                <input disabled type="text" name="addressCustomer"  th:value="${dto.getAddressCustomer()}" class="form-control" id="addressCustomer" placeholder="Địa chỉ khách hàng ...">
+            </div>
+            <div class="form-group">
+                <label for="ageCustomer">Tuổi</label>
+                <input disabled type="text" name="ageCustomer"  th:value="${dto.getAgeCustomer()}" class="form-control" id="ageCustomer" placeholder="Tuổi ...">
+            </div>
+            <div class="form-group">
+                <label for="timeStart">Ngày bắt đầu</label>
+                <input disabled type="text" name="timeStart"  th:value="${dto.getTimeStart()}" class="form-control" id="timeStart" placeholder="Giá phòng một đêm ...">
+            </div>
+            <div class="form-group">
+                <label for="timeEnd">Ngày kết thúc</label>
+                <input disabled type="text" name="timeEnd"  th:value="${dto.getTimeEnd()}" class="form-control" id="timeEnd" placeholder="Giá phòng một đêm ...">
+            </div>
+        </div>
+<!--    </form>-->
+</div>
+</body>
+</html>

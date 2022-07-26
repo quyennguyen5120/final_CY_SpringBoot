@@ -62,6 +62,15 @@ public class Controllerrrrrrrrr {
 
         return "roomIndex";
     }
+    @GetMapping("/detailRoom/")
+    @Secured("ROLE_ADMIN")
+    public String redirectList(@RequestParam(value = "id", required = false) Long id, Model model){
+        RenterEntity renter = renterRepository.getByRoomId(id);
+        RoomEntity room = roomRepository.getById(id);
+        RenterDTO renterDTO = new RenterDTO(renter, room);
+        model.addAttribute("dto",renterDTO);
+        return "roomDetail";
+    }
     @PostMapping("/createOrUpdateRoom")
     @Secured("ROLE_ADMIN")
     public String createOrUpdateRoom(RoomDTO roomDTO) {

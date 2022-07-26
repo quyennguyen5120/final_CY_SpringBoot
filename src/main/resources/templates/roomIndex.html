@@ -68,6 +68,7 @@
                 <td th:if="${item.isAvailabel}">
                     <form method="get" class="mr-2" >
                         <a th:href="@{/checkoutRoom/(id=${item.getId()})}" type="submit" class="btn btn-warning">Trả phòng</a>
+                        <a th:href="@{/detailRoom/(id=${item.getId()})}" type="submit" class="btn btn-info ml-2">Chi tiết</a>
                     </form>
                 </td>
                 <td class="d-flex">
