@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Cập nhật phòng')" />
+<body>
+<div class="container">
+    <h2>Cập nhật phòng</h2>
+    <div class="d-flex mb-2" style="font-weight: 600;">
+        <a th:href="@{/roomIndex}" type="submit" >Quay lại</a>
+    </div>
+    <form class="modal-content" method="post" th:action="@{/createOrUpdateRoom}" th:object="${dto}">
+        <div class="modal-body">
+            <input type="text" name="id"  th:value="${dto.getId()}" class="form-control d-none">
+            <div class="form-group">
+                <label for="code">Mã phòng</label>
+                <input type="text" name="code"  th:value="${dto.getCode()}" class="form-control" id="code"  placeholder="Mã phòng ...">
+            </div>
+            <div class="form-group">
+                <label for="name">Tên phòng</label>
+                <input type="text" name="name" th:value="${dto.getName()}" class="form-control" id="name"  placeholder="Tên phòng ...">
+            </div>
+            <div class="form-group">
+                <label for="price">Giá phòng/đêm</label>
+                <input type="number" name="price"  th:value="${dto.getPrice()}" class="form-control" id="price" placeholder="Giá phòng một đêm ...">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu mới</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Quản lý phòng')" />
+<body>
+<div class="container">
+    <h2>Quản lý doanh thu</h2>
+    <div class="d-flex mb-2" style="font-weight: 600;">
+        <a th:href="@{/index}" type="submit" >Quay lại</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Mã phòng</th>
+            <th scope="col">Tổng tiền phòng</th>
+            <th scope="col">Tên khách hàng</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Tuổi</th>
+            <th scope="col">Số ngày thuê</th>
+            <th scope="col">Thời gian đặt phòng</th>
+            <th scope="col">Thời gian kết thúc</th>
+            <th scope="col">Thời gian checkout</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "item,iterStat : ${listRoom}">
+            <th th:text="${iterStat.index + 1}"></th>
+            <td th:text = "${item.RoomCode}"></td>
+            <td style="color: red" th:text = "${item.totalPrice}"></td>
+            <td th:text = "${item.nameCustomer}"></td>
+            <td th:text = "${item.addressCustomer}"></td>
+            <td th:text = "${item.ageCustomer}"></td>
+            <td th:text = "${item.dayThue}"></td>
+            <td th:text = "${item.timeStart}"></td>
+            <td th:text = "${item.timeEnd}"></td>
+            <td th:text = "${item.timeCheckout}"></td>
+        </tr>
+        </tbody>
+    </table>
+   <div class="d-flex">
+       <h2>Tổng tiền: </h2><h2 style="color: red" th:text="${totalPrice}"></h2><h2>VND</h2>
+   </div>
+
+</div>
+</body>
+</html>

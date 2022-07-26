@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Quản lý phòng')" />
+<body>
+    <div class="container">
+        <h2>Quản lý phòng</h2>
+        <div class="d-flex mb-2" style="font-weight: 600;">
+            <a th:href="@{/index}" type="submit" >Quay lại</a>
+        </div>
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalCenter">
+          Thêm mới
+        </button>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <form class="modal-content" method="post" th:action="@{/createOrUpdateRoom}" th:object="${dto}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Thêm mới</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="code">Mã phòng</label>
+                            <input type="text"  th:field="*{code}" class="form-control" id="code"  placeholder="Mã phòng ...">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Tên phòng</label>
+                            <input type="text"  th:field="*{name}" class="form-control" id="name"  placeholder="Tên phòng ...">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Giá phòng/đêm</label>
+                            <input type="number"  th:field="*{price}" class="form-control" id="price" placeholder="Giá phòng một đêm ...">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu mới</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Mã phòng</th>
+                <th scope="col">Tên phòng</th>
+                <th scope="col">Giá phòng/đêm</th>
+                <th scope="col">Trạng thái phòng</th>
+                <th scope="col">Checkin/checkout</th>
+                <th scope="col">Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "item,iterStat : ${listRoom}">
+                <th th:text="${iterStat.index + 1}"></th>
+                <td th:text = "${item.code}"></td>
+                <td th:text = "${item.name}"></td>
+                <td th:text = "${item.price}"></td>
+                <td th:if="${item.isAvailabel}">Phòng đã có người thuê</td>
+                <td th:if="${!item.isAvailabel}">Phòng trống</td>
+                <td th:if="${!item.isAvailabel}">
+                    <form method="get" class="mr-2" >
+                        <a th:href="@{/orderRoom/(id=${item.getId()})}" type="submit" class="btn btn-info">Đặt phòng</a>
+                    </form>
+                </td>
+                <td th:if="${item.isAvailabel}">
+                    <form method="get" class="mr-2" >
+                        <a th:href="@{/checkoutRoom/(id=${item.getId()})}" type="submit" class="btn btn-warning">Trả phòng</a>
+                    </form>
+                </td>
+                <td class="d-flex">
+                    <form method="post" class="mr-2">
+                        <a th:href="@{/updateRoom/(id=${item.getId()})}" type="submit" class="btn btn-warning">Sửa</a>
+                    </form>
+                    <form th:if="${!item.isAvailabel}" method="get">
+                        <a th:href="@{/deleteRoom/(id=${item.getId()})}" type="submit" class="btn btn-danger">Xóa</a>
+                    </form>
+                    <form th:if="${item.isAvailabel}" method="get" >
+                        <button style="cursor: default;color: #6c757d" type="button" onclick="alertDelete()" class="btn btn-light">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+<script>
+    function alertDelete(){
+        alert("Phòng đã có người thuê, không thể xóa!!!");
+    }
+</script>
+</html>
